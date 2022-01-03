@@ -39,7 +39,6 @@ class Main_window:
             loginframe=Frame(window,width=1000,height=558,bg='#000000')
             loginframe.place(x=0,y=42)
             Label(loginframe,text='Login',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=440,y=50)
-            Label(loginframe,text='Register',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=430,y=50)
             Label(loginframe,text='Email',font=("Poppins",20),background='#000000',foreground='#8AF8FF').place(x=325,y=140)
             Label(loginframe,text='Password',font=("Poppins",20),background='#000000',foreground='#8AF8FF').place(x=325,y=270)
 
