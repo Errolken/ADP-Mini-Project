@@ -117,7 +117,6 @@ class Main_window:
         loginbtn=Button(window,text='Login',command=loginrun,font=("Poppins",24),background='#000000',foreground='#FFFFFF',activebackground="white",bd=0,highlightthickness=0,relief='sunken')
         loginbtn.place(x=500,y=0,width=500,height=42)
         
-        #intializing a frame in root window for register
         if isReg:
             loginrun()
         else:
