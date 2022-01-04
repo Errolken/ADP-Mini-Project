@@ -36,13 +36,13 @@ class Mainhome:
 
                 myButton1.place(x=x,y=y)
 
-            def funds():
+            def pdf_code():
                 menu.destroy()
                 glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 f3=Frame(w,width=1400,height=658,bg='#262626')
                 f3.place(x=0,y=42)
     
-            def trans_history():
+            def word_code():
                 menu.destroy()
                 f4=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
@@ -52,19 +52,19 @@ class Mainhome:
                 menu.destroy()
                 default_home()
 
-            def manage_cards():
+            def excel_code():
                 menu.destroy()
                 f6=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
 
 
-            def manage_profile():
+            def csv_code():
                 menu.destroy()
                 f6=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='CSV Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 f6.place(x=0,y=42)
 
-            def contact_us():
+            def services_code():
                 menu.destroy()
                 f7=Frame(w,width=1400,height=658,bg='#262626')
                 f7.place(x=0,y=42)
@@ -75,11 +75,11 @@ class Mainhome:
                 login.Main_window('login')
 
             bttn(0,80,'Home','#D2E6FB','#D2E6FB',home)
-            bttn(0,150,'Manage PDF','#D2E6FB','#D2E6FB',funds)
-            bttn(0,220,'Manage Word','#D2E6FB','#D2E6FB',trans_history)
-            bttn(0,290,'Manage Excel','#D2E6FB','#D2E6FB',manage_cards)
-            bttn(0,360,'Manage CSV','#D2E6FB','#D2E6FB',manage_profile)
-            bttn(0,430,'Services','#D2E6FB','#D2E6FB',contact_us)
+            bttn(0,150,'Manage PDF','#D2E6FB','#D2E6FB',pdf_code)
+            bttn(0,220,'Manage Word','#D2E6FB','#D2E6FB',word_code)
+            bttn(0,290,'Manage Excel','#D2E6FB','#D2E6FB',excel_code)
+            bttn(0,360,'Manage CSV','#D2E6FB','#D2E6FB',csv_code)
+            bttn(0,430,'Services','#D2E6FB','#D2E6FB',services_code)
             bttn(0,650,'Logout','#D2E6FB','#D2E6FB',logout)
                 
             def dele():
