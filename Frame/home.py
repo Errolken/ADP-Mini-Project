@@ -2,7 +2,8 @@ from tkinter import *
 from PIL import ImageTk,Image
 from Frame import login
 import mysql.connector
-
+from tkinter import filedialog
+from PIL import ImageTk,Image
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -33,15 +34,46 @@ class Mainhome:
                 myButton1= Button(menu,text=text,width=25,height=1,fg='#262626',border=0,font=("Poppins",15),bg=fcolor,activebackground='#262626',activeforeground=bcolor,command=cmd)
                 myButton1.bind("<Enter>",on_entera)
                 myButton1.bind("<Enter>",on_leavea)
-
                 myButton1.place(x=x,y=y)
 
             def pdf_code():
+                #function to splut pdfs
+                def pdfmerge():
+                    print("merge pdfs here")
+
+                #funtion to merge pdfs
+                def pdfsplit():
+                    print("split pdfs here")
+
                 menu.destroy()
                 glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                f3=Frame(w,width=1400,height=658,bg='#262626')
-                f3.place(x=0,y=42)
-    
+                pdfframe=Frame(w,width=1400,height=658,bg='#262626')
+                pdfframe.place(x=0,y=42)
+                
+                #merge pdf button
+                merge_img = PhotoImage(file = f"Frame/home_img/merge.png")
+                label3 = Label(image=merge_img)
+                label3.image=merge_img
+                mergebtn = Button(pdfframe,image = merge_img,borderwidth = 0,highlightthickness = 0,command = pdfmerge,background="#262626",activebackground="#262626",relief = "flat").place(x=130,y=140,width=129,height=119)
+                
+                #split pdf button
+                split_img = PhotoImage(file = f"Frame/home_img/split.png")
+                label3 = Label(image=split_img)
+                label3.image=split_img
+                splitbtn = Button(pdfframe,image = split_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=140,width=129,height=119)
+
+                #rotate pdf button
+                rotate_img = PhotoImage(file = f"Frame/home_img/rotate.png")
+                label3 = Label(image=rotate_img)
+                label3.image=rotate_img
+                rotatebtn = Button(pdfframe,image = rotate_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=130,y=340,width=129,height=119)
+                
+                #convert  pdf to docx button
+                pdfconvert_img = PhotoImage(file = f"Frame/home_img/convert.png")
+                label3 = Label(image=pdfconvert_img)
+                label3.image=pdfconvert_img
+                pdfconvertbtn = Button(pdfframe,image = pdfconvert_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=340,width=129,height=119)
+
             def word_code():
                 menu.destroy()
                 f4=Frame(w,width=1400,height=658,bg='#262626')
