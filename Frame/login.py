@@ -2,9 +2,9 @@ from tkinter import *
 import mysql.connector
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 from tkinter import messagebox,simpledialog
-from Frame import common
+from Frame import common,home
 class Main_window:
-    def __init__(self):
+    def __init__(self, isReg):
         window = Tk()
         #centering the window to the screen
 
@@ -90,6 +90,8 @@ class Main_window:
                         answer = showinfo(title='Error',message='Invalid Password!.',icon=WARNING)
                     else:
                         answer=showinfo(title='Successfull',message='Login Successful.')
+                        window.destroy()
+                        home.Mainhome()
 
             loginbtn.config(background='#FFFFFF',foreground='#000000')
             regbtn.config(background='#000000',foreground='#FFFFFF')
@@ -116,7 +118,10 @@ class Main_window:
         loginbtn.place(x=500,y=0,width=500,height=42)
         
         #intializing a frame in root window for register
-        regrun()
+        if isReg:
+            loginrun()
+        else:
+            regrun()
 
         window.resizable(False,False)
         window.mainloop()
