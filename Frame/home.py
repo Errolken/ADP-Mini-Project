@@ -38,14 +38,14 @@ class Mainhome:
 
             def funds():
                 menu.destroy()
-                glabel=Label(w,text='Transfer Funds',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                f3=Frame(w,width=600,height=658,bg='#ACD6FF')
+                glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                f3=Frame(w,width=1400,height=658,bg='#262626')
                 f3.place(x=0,y=42)
     
             def trans_history():
                 menu.destroy()
                 f4=Frame(w,width=1400,height=658,bg='#262626')
-                glabel=Label(w,text='Transaction History',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 f4.place(x=0,y=42)
 
             def home():
@@ -54,31 +54,32 @@ class Mainhome:
 
             def manage_cards():
                 menu.destroy()
-                print("hello")
+                f6=Frame(w,width=1400,height=658,bg='#262626')
+                glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
 
 
             def manage_profile():
                 menu.destroy()
                 f6=Frame(w,width=1400,height=658,bg='#262626')
-                glabel=Label(w,text='Profile',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                glabel=Label(w,text='CSV Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 f6.place(x=0,y=42)
 
             def contact_us():
                 menu.destroy()
                 f7=Frame(w,width=1400,height=658,bg='#262626')
                 f7.place(x=0,y=42)
-                glabel=Label(w,text='Contact Us',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                glabel=Label(w,text='Automated Services',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
 
             def logout():
                 w.destroy()
                 login.Main_window('login')
 
             bttn(0,80,'Home','#D2E6FB','#D2E6FB',home)
-            bttn(0,150,'Transfer Funds','#D2E6FB','#D2E6FB',funds)
-            bttn(0,220,'Transaction History','#D2E6FB','#D2E6FB',trans_history)
-            bttn(0,290,'Manage Cards','#D2E6FB','#D2E6FB',manage_cards)
-            bttn(0,360,'Manage Profile','#D2E6FB','#D2E6FB',manage_profile)
-            bttn(0,430,'Contact Us','#D2E6FB','#D2E6FB',contact_us)
+            bttn(0,150,'Manage PDF','#D2E6FB','#D2E6FB',funds)
+            bttn(0,220,'Manage Word','#D2E6FB','#D2E6FB',trans_history)
+            bttn(0,290,'Manage Excel','#D2E6FB','#D2E6FB',manage_cards)
+            bttn(0,360,'Manage CSV','#D2E6FB','#D2E6FB',manage_profile)
+            bttn(0,430,'Services','#D2E6FB','#D2E6FB',contact_us)
             bttn(0,650,'Logout','#D2E6FB','#D2E6FB',logout)
                 
             def dele():
