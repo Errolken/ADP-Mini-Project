@@ -71,7 +71,7 @@ class Mainhome:
 
             def logout():
                 w.destroy()
-                login.Main_window(True)
+                login.Main_window('login')
 
             bttn(0,80,'Home','#D2E6FB','#D2E6FB',home)
             bttn(0,150,'Transfer Funds','#D2E6FB','#D2E6FB',funds)

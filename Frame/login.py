@@ -4,7 +4,7 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 from tkinter import messagebox,simpledialog
 from Frame import common,home
 class Main_window:
-    def __init__(self, isReg):
+    def __init__(self,type):
         window = Tk()
         #centering the window to the screen
 
@@ -117,7 +117,7 @@ class Main_window:
         loginbtn=Button(window,text='Login',command=loginrun,font=("Poppins",24),background='#000000',foreground='#FFFFFF',activebackground="white",bd=0,highlightthickness=0,relief='sunken')
         loginbtn.place(x=500,y=0,width=500,height=42)
         
-        if isReg:
+        if type=='login':
             loginrun()
         else:
             regrun()
