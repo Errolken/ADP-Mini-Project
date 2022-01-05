@@ -1,9 +1,11 @@
 from tkinter import *
 from PIL import ImageTk,Image
+from PyPDF2 import pdf
 from Frame import login
-import mysql.connector
 from tkinter import filedialog
+from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
+import PyPDF2,os
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -37,9 +39,67 @@ class Mainhome:
                 myButton1.place(x=x,y=y)
 
             def pdf_code():
-                #function to splut pdfs
+                #function to merge pdfs
                 def pdfmerge():
-                    print("merge pdfs here")
+                    mergeframe=Frame(pdfframe,width=1400,height=658,bg='#000000')
+                    mergeframe.place(x=700,y=0)
+                    Label(mergeframe,text='PDF Merge',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=250,y=0)
+                    global pdfmergecount
+                    pdfmergecount=0
+                    def selectfile():
+                        global pdfmergecount,mergefile1,mergefile2
+                        if(pdfmergecount!=2):
+                            if pdfmergecount==0:
+                                mergefile1=filedialog.askopenfilename(initialdir="C:\\",title="Open",filetypes=(("PDF Files","*.pdf"),("All files","*.*")))
+                                if mergefile1!='' and mergefile1:
+                                    pdfmergecount+=1
+                                    t1=Entry(mergeframe,bd=0,highlightthickness=0,font=("Poppins",16))
+                                    t1.place(x=100,y=230,width=650)
+                                    t1.insert(0,os.path.basename(mergefile1))
+                                    t1.configure(state='readonly',readonlybackground="#000000",foreground="#FFFFFF")
+                            else:
+                                mergefile2=filedialog.askopenfilename(initialdir="C:\\",title="Open",filetypes=(("PDF Files","*.pdf"),("All files","*.*")))
+                                if mergefile2!='':
+                                    pdfmergecount+=1
+                                    t1=Entry(mergeframe,bd=0,highlightthickness=0,font=("Poppins",16))
+                                    t1.place(x=100,y=330,width=650)
+                                    t1.insert(0,os.path.basename(mergefile2))
+                                    t1.configure(state='readonly',readonlybackground="#000000",foreground="#FFFFFF")
+                        else:
+                            showinfo(title='Error',message='Maximum two files Supported.',icon=WARNING)
+                    def finalmerge():
+                        if pdfmergecount!=2:
+                            showinfo(title='Error',message='Merge requires two files.',icon=WARNING)
+                        else:
+                            pdf1File = open(mergefile1, 'rb')
+                            pdf2File = open(mergefile2, 'rb')
+                            # File Readers
+                            pdf1Reader = PyPDF2.PdfFileReader(pdf1File)
+                            pdf2Reader = PyPDF2.PdfFileReader(pdf2File)
+                            #File writer
+                            if pdf1Reader.isEncrypted==False and pdf2Reader.isEncrypted==False:
+                                pdfWriter = PyPDF2.PdfFileWriter()
+                                for pageNum in range(pdf1Reader.numPages):
+                                    pageObj = pdf1Reader.getPage(pageNum)
+                                    pdfWriter.addPage(pageObj)
+                                
+                                for pageNum in range(pdf2Reader.numPages):
+                                    pageObj = pdf2Reader.getPage(pageNum)
+                                    pdfWriter.addPage(pageObj)
+                                pdfPath = filedialog.asksaveasfilename(defaultextension = "*.pdf", filetypes = (("PDF Files", "*.pdf"),))
+                                if pdfPath: #If the user only selects the save file location
+                                    pdfOutputFile = open(pdfPath, 'wb')
+                                    pdfWriter.write(pdfOutputFile)
+                                    pdfOutputFile.close()
+                                    pdf1File.close()
+                                    pdf2File.close()
+                                    showinfo(title='Success', message='File Merged Successfully!', icon='info')
+                            else:
+                                showinfo(title='Error', message='Encrypted Files Not Supported.', icon=WARNING)
+                            pdfmerge()                           
+
+                    mergebtn = Button(mergeframe,text="Merge & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = finalmerge,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
+                    selectfilebtn = Button(mergeframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
 
                 #funtion to merge pdfs
                 def pdfsplit():
@@ -49,31 +109,18 @@ class Mainhome:
                 glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 pdfframe=Frame(w,width=1400,height=658,bg='#262626')
                 pdfframe.place(x=0,y=42)
-                
                 #merge pdf button
                 merge_img = PhotoImage(file = f"Frame/home_img/merge.png")
-                label3 = Label(image=merge_img)
-                label3.image=merge_img
-                mergebtn = Button(pdfframe,image = merge_img,borderwidth = 0,highlightthickness = 0,command = pdfmerge,background="#262626",activebackground="#262626",relief = "flat").place(x=130,y=140,width=129,height=119)
+                label = Label(image=merge_img)
+                label.image=merge_img
+                mergebtn = Button(pdfframe,image = merge_img,borderwidth = 0,highlightthickness = 0,command = pdfmerge,background="#262626",activebackground="#262626",relief = "flat").place(x=130,y=240,width=129,height=119)
                 
                 #split pdf button
                 split_img = PhotoImage(file = f"Frame/home_img/split.png")
-                label3 = Label(image=split_img)
-                label3.image=split_img
-                splitbtn = Button(pdfframe,image = split_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=140,width=129,height=119)
-
-                #rotate pdf button
-                rotate_img = PhotoImage(file = f"Frame/home_img/rotate.png")
-                label3 = Label(image=rotate_img)
-                label3.image=rotate_img
-                rotatebtn = Button(pdfframe,image = rotate_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=130,y=340,width=129,height=119)
-                
-                #convert  pdf to docx button
-                pdfconvert_img = PhotoImage(file = f"Frame/home_img/convert.png")
-                label3 = Label(image=pdfconvert_img)
-                label3.image=pdfconvert_img
-                pdfconvertbtn = Button(pdfframe,image = pdfconvert_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=340,width=129,height=119)
-
+                label = Label(image=split_img)
+                label.image=split_img
+                splitbtn = Button(pdfframe,image = split_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=240,width=129,height=119)
+                pdfmerge()
             def word_code():
                 menu.destroy()
                 f4=Frame(w,width=1400,height=658,bg='#262626')
