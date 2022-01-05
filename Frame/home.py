@@ -7,7 +7,7 @@ from tkinter import filedialog,scrolledtext
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
-import PyPDF2,os
+import PyPDF2,os,docx,pyperclip
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -103,7 +103,7 @@ class Mainhome:
                     mergebtn = Button(mergeframe,text="Merge & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = finalmerge,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
                     selectfilebtn = Button(mergeframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
 
-                #funtion to merge pdfs
+                #funtion to split pdfs
                 def pdfsplit():
                     print("split pdfs here")
 
@@ -128,7 +128,19 @@ class Mainhome:
                 menu.destroy()
                 def textodoc():
                     doctext=textentry.get("1.0",END)
-                    print(doctext)
+                    import docx,pyperclip
+                    doc=docx.Document()
+                    text=doctext.split('\n')
+                    for para in text:
+                        doc.add_paragraph(para)
+                    wordPath = filedialog.asksaveasfilename(defaultextension = "*.docx", filetypes = (("Word Files", "*.docx"),))
+                    print(wordPath)
+                    if wordPath:
+                        doc.save(wordPath)
+                    showinfo(title='Success', message='File created Successfully!', icon='info')
+
+
+                    
                 wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 wordframe.place(x=0,y=42)
