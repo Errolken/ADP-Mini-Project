@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import scrolledtext
+from tkinter import font
 from PIL import ImageTk,Image
 from PyPDF2 import pdf
 from Frame import login
-from tkinter import filedialog,scrolledtext
+from tkinter import filedialog,scrolledtext,ttk
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
@@ -132,8 +133,23 @@ class Mainhome:
                 wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 wordframe.place(x=0,y=42)
+                #entry of header
+                Label(wordframe,text='Header',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=600,y=0)
+                headerentry=Entry(wordframe,font=("Poppins",20),background="#FFFFFF")
+                headerentry.place(x=600,y=50,width=790,height=60)
+                #content entry
                 textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
-                textentry.place(x=600,y=0,width=800,height=658)
+                textentry.place(x=600,y=120,width=790,height=508)
+            
+                fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
+                fontsize.place(x=340,y=200,width=80,height=40)
+
+                fontstyleval = StringVar()
+                fontstyle = ttk.Combobox(wordframe,textvariable = fontstyleval,foreground="#000000",font=("Poppins",10),state='readonly')
+                fontstyle.place(x=100,y=200,height=40)
+                fontstyle['values'] = ('Cambria','Comic Sans MS','Calibri','Cavolini','Arial')
+                fontstyle.current(1)
+
                 doc_img = PhotoImage(file = f"Frame/home_img/doc.png")
                 label = Label(image=doc_img)
                 label.image=doc_img
