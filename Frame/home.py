@@ -146,6 +146,7 @@ class Mainhome:
             def excel_code():
                 menu.destroy()
                 f6=Frame(w,width=1400,height=658,bg='#262626')
+                f6.place(x=0,y=42)
                 glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
 
 
