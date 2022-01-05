@@ -1,10 +1,12 @@
 from tkinter import *
+from tkinter import scrolledtext
 from PIL import ImageTk,Image
 from PyPDF2 import pdf
 from Frame import login
-from tkinter import filedialog
+from tkinter import filedialog,scrolledtext
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
+from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os
 class Mainhome:
     def __init__(self):
@@ -121,11 +123,13 @@ class Mainhome:
                 label.image=split_img
                 splitbtn = Button(pdfframe,image = split_img,borderwidth = 0,highlightthickness = 0,command = pdfsplit,background="#262626",activebackground="#262626",relief = "flat").place(x=330,y=240,width=129,height=119)
                 pdfmerge()
+
             def word_code():
                 menu.destroy()
-                f4=Frame(w,width=1400,height=658,bg='#262626')
+                wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                f4.place(x=0,y=42)
+                wordframe.place(x=0,y=42)
+                textentry=ScrolledText(wordframe).place(x=0,y=0)
 
             def home():
                 menu.destroy()
