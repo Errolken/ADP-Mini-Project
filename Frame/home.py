@@ -126,10 +126,18 @@ class Mainhome:
 
             def word_code():
                 menu.destroy()
+                def textodoc():
+                    doctext=textentry.get("1.0",END)
+                    print(doctext)
                 wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 wordframe.place(x=0,y=42)
-                textentry=ScrolledText(wordframe).place(x=0,y=0)
+                textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
+                textentry.place(x=600,y=0,width=800,height=658)
+                doc_img = PhotoImage(file = f"Frame/home_img/doc.png")
+                label = Label(image=doc_img)
+                label.image=doc_img
+                Button(wordframe,image=doc_img,borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = textodoc,background="#262626",foreground="#000000",activebackground="#262626",relief = "flat").place(x=230,y=300,width=129,height=119)
 
             def home():
                 menu.destroy()
