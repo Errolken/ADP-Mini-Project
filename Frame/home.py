@@ -152,10 +152,20 @@ class Mainhome:
                 #content entry
                 textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
                 textentry.place(x=600,y=120,width=790,height=508)
-
+                
+                def is_type_int(*args):
+                    item = var.get()
+                    try:
+                        item_type = type(int(item))
+                        if item_type == type(int(1)):
+                            pass
+                    except:
+                        fontsize.delete(0, END)
+                var = StringVar()
                 Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
-                fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
+                fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF",textvariable=var)
                 fontsize.place(x=340,y=200,width=80,height=40)
+                var.trace("w", is_type_int)
                 
                 Label(wordframe,text='Font Style',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=100,y=160)
                 fontstyleval = StringVar()
