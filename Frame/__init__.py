@@ -1,6 +1,6 @@
-# from Frame import login
-from Frame import home
+from Frame import login
+# from Frame import home
 
 def run():
-    # login.Main_window('register')
-    home.Mainhome()
+    login.Main_window('register')
+    # home.Mainhome()
