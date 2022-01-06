@@ -133,7 +133,7 @@ class Mainhome:
                     doc=docx.Document()
                     header=headerentry.get()
                     if header!='':
-                        doc.add_header(header,0)
+                        doc.add_heading(header,0)
                     text=doctext.split('\n')
                     for i in range(len(text)):
                         doc.add_paragraph(text[i])
