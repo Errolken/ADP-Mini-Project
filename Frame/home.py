@@ -131,9 +131,13 @@ class Mainhome:
                     doctext=textentry.get("1.0",END)
                     import docx,pyperclip
                     doc=docx.Document()
+                    header=headerentry.get()
+                    if header!='':
+                        doc.add_header(header,0)
                     text=doctext.split('\n')
-                    for para in text:
-                        doc.add_paragraph(para)
+                    for i in range(len(text)):
+                        doc.add_paragraph(text[i])
+                        doc.paragraphs[i].runs[1].style='QuoteChar'
                     wordPath = filedialog.asksaveasfilename(defaultextension = "*.docx", filetypes = (("Word Files", "*.docx"),))
                     print(wordPath)
                     if wordPath:
@@ -152,17 +156,24 @@ class Mainhome:
                 #content entry
                 textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
                 textentry.place(x=600,y=120,width=790,height=508)
+<<<<<<< HEAD
                 
                 Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
                 fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
                 fontsize.place(x=340,y=200,width=80,height=40)
+=======
+
+                # Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
+                # fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
+                # fontsize.place(x=340,y=200,width=80,height=40)
+>>>>>>> e443ee550a700152edccdfb403a96d509e4466d4
                 
-                Label(wordframe,text='Font Style',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=100,y=160)
-                fontstyleval = StringVar()
-                fontstyle = ttk.Combobox(wordframe,textvariable = fontstyleval,foreground="#000000",font=("Poppins",10),state='readonly')
-                fontstyle.place(x=100,y=200,height=40)
-                fontstyle['values'] = ('Cambria','Comic Sans MS','Calibri','Cavolini','Arial')
-                fontstyle.current(1)
+                # Label(wordframe,text='Font Style',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=100,y=160)
+                # fontstyleval = StringVar()
+                # fontstyle = ttk.Combobox(wordframe,textvariable = fontstyleval,foreground="#000000",font=("Poppins",10),state='readonly')
+                # fontstyle.place(x=100,y=200,height=40)
+                # fontstyle['values'] = ('Cambria','Comic Sans MS','Calibri','Cavolini','Arial')
+                # fontstyle.current(1)
 
                 doc_img = PhotoImage(file = f"Frame/home_img/doc.png")
                 label = Label(image=doc_img)
