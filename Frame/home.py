@@ -9,6 +9,7 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os,docx,pyperclip
+import requests
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -179,9 +180,49 @@ class Mainhome:
 
             def excel_code():
                 menu.destroy()
-                f6=Frame(w,width=1400,height=658,bg='#262626')
-                f6.place(x=0,y=42)
+                excelframe=Frame(w,width=1400,height=658,bg='#262626')
+                excelframe.place(x=0,y=42)
+                                
+                def details():
+                    api_key = "fc997859c662f09ea9dac60a3c71ecbc"
+                    apiurl = "http://api.openweathermap.org/data/2.5/weather?"
+                    city_name = input("Enter city name : ")
+
+                    url = apiurl + "appid=" + api_key + "&q=" + city_name
+                    response = requests.get(url)
+                    x = response.json()
+
+                    #checking if city is found or not
+                    if x["cod"] != "404":
+
+                        y = x["main"]
+                        z = x["weather"]
+                        a = x['coord']
+                        b = x['wind']
+                        c = x['sys'] 
+
+                        latitude=a['lat']
+                        longitude=a['lon']
+                        temp = y["temp"]
+                        pressure = y["pressure"]
+                        humidity = y["humidity"]
+                        country=c['country']
+                        desc = z[0]["description"]
+                        wind_speed=b['speed']
+                    
+                    else:
+                        print(" City Not Found ")
+                search_img = PhotoImage(file = f"Frame/home_img/search.png")
+                label = Label(image=search_img)
+                label.image=search_img
+                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#262626",foreground="#000000",activebackground="#262626",relief = "flat").place(x=830,y=50,width=37,height=39)
+                
+                headerentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
+                headerentry.place(x=600,y=50,width=790,height=60)
+
+                Button(excelframe,borderwidth = 0,text="Submit",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=830,y=250)
                 glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                details()
 
 
             def csv_code():
