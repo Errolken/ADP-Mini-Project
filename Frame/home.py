@@ -274,9 +274,23 @@ class Mainhome:
 
             def csv_code():
                 menu.destroy()
-                f6=Frame(w,width=1400,height=658,bg='#262626')
+                csvframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='CSV Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                f6.place(x=0,y=42)
+                csvframe.place(x=0,y=42)
+
+                cityentry=Entry(csvframe,font=("Poppins",20),background="#FFFFFF")
+                cityentry.place(x=450,y=80,width=400,height=40)
+
+                search_img = PhotoImage(file = f"Frame/home_img/search.png")
+                label = Label(image=search_img)
+                label.image=search_img
+
+                Label(csvframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=10)
+                Button(csvframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
+                
+
+                Button(csvframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+                Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42) 
 
             def services_code():
                 menu.destroy()
