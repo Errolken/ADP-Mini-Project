@@ -1,15 +1,12 @@
 from tkinter import *
-from tkinter import scrolledtext
-from tkinter import font
 from PIL import ImageTk,Image
 from PyPDF2 import pdf
 from Frame import login
-from tkinter import filedialog,scrolledtext,ttk
-from tkinter.messagebox import askokcancel, showinfo, WARNING
+from tkinter import filedialog
+from tkinter.messagebox import showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
-import PyPDF2,os,docx,pyperclip
-import requests,openpyxl
+import PyPDF2,os,requests
 class Mainhome:
     def __init__(self):
         w=Tk()
