@@ -9,7 +9,7 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os,docx,pyperclip
-import requests
+import requests,openpyxl
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -138,7 +138,6 @@ class Mainhome:
                     text=doctext.split('\n')
                     for i in range(len(text)):
                         doc.add_paragraph(text[i])
-                        doc.paragraphs[i].runs[1].style='QuoteChar'
                     wordPath = filedialog.asksaveasfilename(defaultextension = "*.docx", filetypes = (("Word Files", "*.docx"),))
                     print(wordPath)
                     if wordPath:
