@@ -90,7 +90,7 @@ class Mainhome:
                                 for pageNum in range(pdf2Reader.numPages):
                                     pageObj = pdf2Reader.getPage(pageNum)
                                     pdfWriter.addPage(pageObj)
-                                pdfPath = filedialog.asksaveasfilename(defaultextension = "*.pdf", filetypes = (("PDF Files", "*.pdf"),))
+                                pdfPath = filedialog.asksaveasfilename(initialdir="C:\\",defaultextension = "*.pdf", filetypes = (("PDF Files", "*.pdf"),("All files","*.*")))
                                 if pdfPath: #If the user only selects the save file location
                                     pdfOutputFile = open(pdfPath, 'wb')
                                     pdfWriter.write(pdfOutputFile)
@@ -215,15 +215,16 @@ class Mainhome:
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
                 label.image=search_img
-                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#262626",foreground="#000000",activebackground="#262626",relief = "flat").place(x=830,y=50,width=37,height=39)
-                
-                headerentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
-                headerentry.place(x=600,y=50,width=790,height=60)
 
-                Button(excelframe,borderwidth = 0,text="Submit",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=830,y=250)
+                Label(excelframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=30)
+                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
+                
+                cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
+                cityentry.place(x=450,y=80,width=400,height=40)
+
+                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
                 glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 details()
-
 
             def csv_code():
                 menu.destroy()
