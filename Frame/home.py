@@ -239,7 +239,7 @@ class Mainhome:
                             country=c['country']
                             desc = z[0]["description"]
                             wind_speed=b['speed']             
-                    wb=openpyxl.load_workbook('test.xlsx')
+                    wb=openpyxl.load_workbook('Filo Directory/test.xlsx')
                     sheet = wb.get_active_sheet()
 
                     list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
@@ -256,8 +256,7 @@ class Mainhome:
                             # print(sheet.cell(row=j,column=i+1).value)
                     # for i in range(2,10):
                     # sheet.cell(row=i,column=1).value=i-1
-
-                    wb.save('test.xlsx')
+                    wb.save('test.xlxs')
                 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
@@ -267,42 +266,108 @@ class Mainhome:
                 Label(excelframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=10)
                 Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = get_weather,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
                 
-
-                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=510,y=600,height=40)
+                Button(excelframe,borderwidth = 0,text="Export as CSV",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=680,y=600,height=40)
                 Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                
-
-            def csv_code():
-                menu.destroy()
-                csvframe=Frame(w,width=1400,height=658,bg='#262626')
-                glabel=Label(w,text='CSV Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                csvframe.place(x=0,y=42)
-
-                cityentry=Entry(csvframe,font=("Poppins",20),background="#FFFFFF")
-                cityentry.place(x=450,y=80,width=400,height=40)
-
-                search_img = PhotoImage(file = f"Frame/home_img/search.png")
-                label = Label(image=search_img)
-                label.image=search_img
-
-                Label(csvframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=10)
-                Button(csvframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
-                
-
-                Button(csvframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
-                Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42) 
-
             def services_code():
+                def gmail():
+                    gmailframe=Frame(servframe,width=700,height=658,bg='#000000')
+                    gmailframe.place(x=700,y=0)
+                    gmaillabel_img = PhotoImage(file = f"Frame/home_img/gmaillabel.png")
+                    label = Label(image=gmaillabel_img)
+                    label.image=gmaillabel_img
+                    Label(gmailframe,image=gmaillabel_img,font=("Poppins",24),background='#FFFFFF').place(x=0,y=0,width=700,height=80)
+
+                    Label(gmailframe,text="Email",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=170,width=700,height=80)
+                    email = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    email.place(x=180,y=230,width=350)
+
+                    Label(gmailframe,text="Password",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=290,width=700,height=80)
+                    pwd = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    pwd.place(x=180,y=350,width=350)
+
+                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=450,width=120)
+
+
+                def amazon():
+                    amazonframe=Frame(servframe,width=700,height=658,bg='#000000')
+                    amazonframe.place(x=700,y=0)
+                    amazonlabel_img = PhotoImage(file = f"Frame/home_img/amazonlabel.png")
+                    label = Label(image=amazonlabel_img)
+                    label.image=amazonlabel_img
+                    Label(amazonframe,image=amazonlabel_img,font=("Poppins",24),background='#FFFFFF').place(x=0,y=0,width=700,height=80)
+
+                    Label(amazonframe,text="Search Product",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=170,width=700,height=80)
+                    
+                    amazonprod = Entry(amazonframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    amazonprod.place(x=180,y=230,width=350)
+
+                    Button(amazonframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+
+                def flipkart():
+                    flipkartframe=Frame(servframe,width=700,height=658,bg='#000000')
+                    flipkartframe.place(x=700,y=0)
+                    flipkartlabel_img = PhotoImage(file = f"Frame/home_img/flipkartlabel.png")
+                    label = Label(image=flipkartlabel_img)
+                    label.image=flipkartlabel_img
+                    Label(flipkartframe,image=flipkartlabel_img,font=("Poppins",24),background='#FFFFFF').place(x=0,y=0,width=700,height=80)
+
+                    Label(flipkartframe,text="Search Product",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=170,width=700,height=80)
+
+                    flipkartprod = Entry(flipkartframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    flipkartprod.place(x=180,y=230,width=350)
+                    
+                    Button(flipkartframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+
+                def youtube():
+                    youtubeframe=Frame(servframe,width=700,height=658,bg='#000000')
+                    youtubeframe.place(x=700,y=0)
+                    youtubelabel_img = PhotoImage(file = f"Frame/home_img/youtubelabel.png")
+                    label = Label(image=youtubelabel_img)
+                    label.image=youtubelabel_img
+                    Label(youtubeframe,image=youtubelabel_img,font=("Poppins",24),background='#FFFFFF').place(x=0,y=0,width=700,height=80)
+
+                    Label(youtubeframe,text="Search Video",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=170,width=700,height=80)
+                    videotxt = Entry(youtubeframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    videotxt.place(x=180,y=230,width=350)
+
+                    Button(youtubeframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+    
+
                 menu.destroy()
                 servframe=Frame(w,width=1400,height=658,bg='#262626')
                 servframe.place(x=0,y=42)
                 glabel=Label(w,text='Automated Services',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+
+                servinput=Frame(servframe,width=700,height=658,bg='#000000')
+                servinput.place(x=700,y=0)
                 
+                #gmail button
                 gmail_img = PhotoImage(file = f"Frame/home_img/gmail.png")
                 label = Label(image=gmail_img)
                 label.image=gmail_img
-                Button(servframe,borderwidth = 0,image=gmail_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+                Button(servframe,borderwidth = 0,image=gmail_img,highlightthickness = 0,font=("Poppins",15),command = gmail,background="#262626",activebackground="#262626",relief = "flat").place(x=240,y=150,width=206,height=62)
 
+                #amazon button
+                amazon_img = PhotoImage(file = f"Frame/home_img/amazon.png")
+                label = Label(image=amazon_img)
+                label.image=amazon_img
+                Button(servframe,borderwidth = 0,image=amazon_img,highlightthickness = 0,font=("Poppins",15),command = amazon,background="#262626",activebackground="#262626",relief = "flat").place(x=240,y=250,width=206,height=62)
+
+                #flipkart button
+                flipkart_img = PhotoImage(file = f"Frame/home_img/flipkart.png")
+                label = Label(image=flipkart_img)
+                label.image=flipkart_img
+                Button(servframe,borderwidth = 0,image=flipkart_img,highlightthickness = 0,font=("Poppins",15),command = flipkart,background="#262626",activebackground="#262626",relief = "flat").place(x=240,y=350,width=206,height=62)
+
+                #youtube button
+                youtube_img = PhotoImage(file = f"Frame/home_img/youtube.png")
+                label = Label(image=youtube_img)
+                label.image=youtube_img
+                Button(servframe,borderwidth = 0,image=youtube_img,highlightthickness = 0,font=("Poppins",15),command = youtube,background="#262626",activebackground="#262626",relief = "flat").place(x=240,y=450,width=206,height=62)
+
+                gmail()
 
             def logout():
                 w.destroy()
@@ -312,8 +377,7 @@ class Mainhome:
             bttn(0,150,'Manage PDF','#D2E6FB','#D2E6FB',pdf_code)
             bttn(0,220,'Manage Word','#D2E6FB','#D2E6FB',word_code)
             bttn(0,290,'Manage Excel','#D2E6FB','#D2E6FB',excel_code)
-            bttn(0,360,'Manage CSV','#D2E6FB','#D2E6FB',csv_code)
-            bttn(0,430,'Services','#D2E6FB','#D2E6FB',services_code)
+            bttn(0,360,'Services','#D2E6FB','#D2E6FB',services_code)
             bttn(0,650,'Logout','#D2E6FB','#D2E6FB',logout)
                 
             def dele():
