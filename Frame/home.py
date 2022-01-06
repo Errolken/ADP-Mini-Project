@@ -190,7 +190,7 @@ class Mainhome:
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
                         response = requests.get(url)
                         x = response.json()
-                        print(response)
+                        # print(response)
                         #checking if city is found or not
                         if x["cod"] != "404":
 
@@ -248,12 +248,12 @@ class Mainhome:
                     #     a=list_headings[i]
                     #     sheet.cell(row=1,column=i+1).value=a
                     j=sheet.get_highest_row()+1
-                    print(j)
+                    # print(j)
                     sheet['A'+str(j)].value=j-1
                     for i in range(1,11):
                         if i<=9:
                             sheet.cell(row=j,column=i+1).value=list[i-1]
-                            print(sheet.cell(row=j,column=i+1).value)
+                            # print(sheet.cell(row=j,column=i+1).value)
                     # for i in range(2,10):
                     # sheet.cell(row=i,column=1).value=i-1
 
