@@ -156,17 +156,10 @@ class Mainhome:
                 #content entry
                 textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
                 textentry.place(x=600,y=120,width=790,height=508)
-<<<<<<< HEAD
-                
-                Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
-                fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
-                fontsize.place(x=340,y=200,width=80,height=40)
-=======
 
                 # Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
                 # fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
                 # fontsize.place(x=340,y=200,width=80,height=40)
->>>>>>> e443ee550a700152edccdfb403a96d509e4466d4
                 
                 # Label(wordframe,text='Font Style',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=100,y=160)
                 # fontstyleval = StringVar()
