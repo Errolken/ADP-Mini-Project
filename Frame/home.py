@@ -6,7 +6,7 @@ from tkinter import filedialog
 from tkinter.messagebox import showinfo, WARNING
 from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
-import PyPDF2,os,requests
+import PyPDF2,os,requests,openpyxl
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -179,65 +179,97 @@ class Mainhome:
                 excelframe=Frame(w,width=1400,height=658,bg='#262626')
                 excelframe.place(x=0,y=42)
                                 
-                def details():
+                def get_weather():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
-                    city_name = input("Enter city name : ")
-
-                    url = apiurl + "appid=" + api_key + "&q=" + city_name
-                    response = requests.get(url)
-                    x = response.json()
-
-                    #checking if city is found or not
-                    if x["cod"] != "404":
-
-                        y = x["main"]
-                        z = x["weather"]
-                        a = x['coord']
-                        b = x['wind']
-                        c = x['sys'] 
-
-                        latitude=a['lat']
-                        longitude=a['lon']
-                        temp = y["temp"]
-                        pressure = y["pressure"]
-                        humidity = y["humidity"]
-                        country=c['country']
-                        desc = z[0]["description"]
-                        wind_speed=b['speed']
-                                        
-                        wb = openpyxl.load_workbook('test.xlsx')
-
-                        sheet = wb.get_active_sheet()
-
-                        list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                        list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
-                        # for i in range(10):
-                        #     a=list_headings[i]
-                        #     sheet.cell(row=1,column=i+1).value=a
+                    city_name = cityentry.get()
+                    if city_name=='':
+                        showinfo(title='Error', message='Enter a city!', icon=WARNING)
                         
-                            
-                        # for i in range(2,10):
-                            # sheet.cell(row=i,column=1).value=i-1
+                        url = apiurl + "appid=" + api_key + "&q=" + city_name
+                        response = requests.get(url)
+                        x = response.json()
 
-                        wb.save('test.xlsx')
-                    
-                    else:
-                        print(" City Not Found ")
+                        #checking if city is found or not
+                        if x["cod"] != "404":
+
+                            y = x["main"]
+                            z = x["weather"]
+                            a = x['coord']
+                            b = x['wind']
+                            c = x['sys'] 
+
+                            latitude=a['lat']
+                            longitude=a['lon']
+                            temp = y["temp"]
+                            pressure = y["pressure"]
+                            humidity = y["humidity"]
+                            country=c['country']
+                            desc = z[0]["description"]
+                            wind_speed=b['speed']
+                            print(pressure)
+                        else:
+                            print(" City Not Found ")
+                def export_details():
+                    api_key = "fc997859c662f09ea9dac60a3c71ecbc"
+                    apiurl = "http://api.openweathermap.org/data/2.5/weather?"
+                    city_name = cityentry.get()
+                    if city_name=='':
+                        showinfo(title='Error', message='Enter a city!', icon=WARNING)
+                        
+                        url = apiurl + "appid=" + api_key + "&q=" + city_name
+                        response = requests.get(url)
+                        x = response.json()
+
+                        #checking if city is found or not
+                        if x["cod"] != "404":
+
+                            y = x["main"]
+                            z = x["weather"]
+                            a = x['coord']
+                            b = x['wind']
+                            c = x['sys'] 
+
+                            latitude=a['lat']
+                            longitude=a['lon']
+                            temp = y["temp"]
+                            pressure = y["pressure"]
+                            humidity = y["humidity"]
+                            country=c['country']
+                            desc = z[0]["description"]
+                            wind_speed=b['speed']             
+                    wb=openpyxl.load_workbook('test.xlsx')
+                    sheet = wb.get_active_sheet()
+
+                    list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                    # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                    # for i in range(10):
+                    #     a=list_headings[i]
+                    #     sheet.cell(row=1,column=i+1).value=a
+                    j=sheet.get_highest_row()+1
+                    sheet['A'+str(j)].value=j
+                    for i in range(1,11):
+                        if i<=9:
+                            sheet.cell(row=j,column=i).value=list[i-1]
+                    # for i in range(2,10):
+                    # sheet.cell(row=i,column=1).value=i-1
+
+                    wb.save('test.xlsx')
+                
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
                 label.image=search_img
 
                 Label(excelframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=30)
-                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
+                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = get_weather(),background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
                 
                 cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
                 cityentry.place(x=450,y=80,width=400,height=40)
 
-                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details(),background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
                 glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
-                details()
+               
 
             def csv_code():
                 menu.destroy()
