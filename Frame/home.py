@@ -292,9 +292,15 @@ class Mainhome:
 
             def services_code():
                 menu.destroy()
-                f7=Frame(w,width=1400,height=658,bg='#262626')
-                f7.place(x=0,y=42)
+                servframe=Frame(w,width=1400,height=658,bg='#262626')
+                servframe.place(x=0,y=42)
                 glabel=Label(w,text='Automated Services',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                
+                gmail_img = PhotoImage(file = f"Frame/home_img/gmail.png")
+                label = Label(image=gmail_img)
+                label.image=gmail_img
+                Button(servframe,borderwidth = 0,image=gmail_img,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+
 
             def logout():
                 w.destroy()
