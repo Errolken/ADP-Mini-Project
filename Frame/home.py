@@ -256,7 +256,14 @@ class Mainhome:
                             # print(sheet.cell(row=j,column=i+1).value)
                     # for i in range(2,10):
                     # sheet.cell(row=i,column=1).value=i-1
+<<<<<<< HEAD
                     wb.save('test.xlxs')
+=======
+
+                    wb.save('test.xlsx')
+                    showinfo(title='Successful',message='Data exported succesfully!')
+
+>>>>>>> 08fdc827288aaebd76081f6c7373c3c10abcc35c
                 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
