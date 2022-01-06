@@ -258,6 +258,8 @@ class Mainhome:
                     # sheet.cell(row=i,column=1).value=i-1
 
                     wb.save('test.xlsx')
+                    showinfo(title='Successful',message='Data exported succesfully!')
+
                 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
