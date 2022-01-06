@@ -208,9 +208,26 @@ class Mainhome:
                         country=c['country']
                         desc = z[0]["description"]
                         wind_speed=b['speed']
+                                        
+                        wb = openpyxl.load_workbook('test.xlsx')
+
+                        sheet = wb.get_active_sheet()
+
+                        list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                        list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                        # for i in range(10):
+                        #     a=list_headings[i]
+                        #     sheet.cell(row=1,column=i+1).value=a
+                        
+                            
+                        # for i in range(2,10):
+                            # sheet.cell(row=i,column=1).value=i-1
+
+                        wb.save('test.xlsx')
                     
                     else:
                         print(" City Not Found ")
+
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
                 label.image=search_img
