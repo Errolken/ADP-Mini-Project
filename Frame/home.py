@@ -4,7 +4,6 @@ from PyPDF2 import pdf
 from Frame import login
 from tkinter import filedialog
 from tkinter.messagebox import showinfo, WARNING
-from PIL import ImageTk,Image
 from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os,requests,openpyxl
 class Mainhome:
@@ -178,7 +177,9 @@ class Mainhome:
                 menu.destroy()
                 excelframe=Frame(w,width=1400,height=658,bg='#262626')
                 excelframe.place(x=0,y=42)
-                                
+
+                cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
+                cityentry.place(x=450,y=80,width=400,height=40)                
                 def get_weather():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -261,14 +262,12 @@ class Mainhome:
                 label = Label(image=search_img)
                 label.image=search_img
 
-                Label(excelframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=30)
-                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = get_weather(),background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
+                Label(excelframe,text='Place',font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=450,y=10)
+                Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = get_weather,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
                 
-                cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
-                cityentry.place(x=450,y=80,width=400,height=40)
 
-                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details(),background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
-                glabel=Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=580,y=600,height=40)
+                Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                
 
             def csv_code():
