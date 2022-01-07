@@ -1,6 +1,4 @@
-# from Frame import login
-from Frame import home
-
+from Frame import login
 def run():
-    # login.Main_window('register')
-    home.Mainhome().services_code
+    #start of the application
+    login.Main_window('register')
