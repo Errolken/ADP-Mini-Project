@@ -265,6 +265,7 @@ class Mainhome:
                     Label(dataframe,text='Sky: '+str(desc),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=350)
                     Label(dataframe,text='Wind Speed: '+str(wind_speed),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=400)                
                 def get_weather():
+                    #API to get weather details from openweathermap.org
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
                     city_name = cityentry.get()
@@ -278,7 +279,7 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:    
-                            x = response.json()
+                            x = json.loads(response.txt)
                             if x["cod"] != "404":
 
                                 y = x["main"]
@@ -295,13 +296,12 @@ class Mainhome:
                                 country=c['country']
                                 desc = z[0]["description"]
                                 wind_speed=b['speed']
-                                # list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
-
+                        
                                 labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                             else:
                                 showinfo(title='Error', message='City not found!', icon=WARNING)
                 def export_details():
+                    #API to get weather details from openweathermap.org
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
                     city_name = cityentry.get()
@@ -314,9 +314,9 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:    
-                            x = json.loads(response.text)
+                            x = json.loads(response.text) # Converts json data to python dictionary
 
-                            if x["cod"] != "404":
+                            if x["cod"] != "404":          # Checks status_code of the response
 
                                 y = x["main"]
                                 z = x["weather"]
@@ -332,13 +332,13 @@ class Mainhome:
                                 country=c['country']
                                 desc = z[0]["description"]
                                 wind_speed=b['speed']             
+                                # Loads an excel file and adds the data to it row-wise
                                 wb=openpyxl.load_workbook('FiloDirectory\\test.xlsx')
                                 sheet = wb.get_active_sheet()
                                 list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                                # Displays data in the window
                                 labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
                                 j=sheet.get_highest_row()+1
-                                # print(j)
                                 sheet['A'+str(j)].value=j-1
                                 for i in range(1,11):
                                     if i<=9:
@@ -363,8 +363,8 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:
-                            x = response.json()
-                            if x["cod"] != "404":
+                            x = json.loads(response.txt) # Converts json data to python dictionary
+                            if x["cod"] != "404":        # Checks status_code of the response
 
                                 y = x["main"]
                                 z = x["weather"]
@@ -381,10 +381,9 @@ class Mainhome:
                                 desc = z[0]["description"]
                                 wind_speed=b['speed']
                                 list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
 
                                 labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
-                    
+                                # Loads csv file and appends the weather data to it row-wise
                                 weatherfile = open('FiloDirectory/weather.csv', 'a', newline='')
                                 weathWriter = csv.writer(weatherfile)
                                 weathWriter.writerow(list)
@@ -427,6 +426,7 @@ class Mainhome:
 
 
                 def amazon():
+                    # Accessing the website amazon using selenium webdriver
                     def browse_amaz():
                         global driver
                         driver=webdriver.Chrome()
@@ -456,6 +456,8 @@ class Mainhome:
                     Button(amazonframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = browse_amaz,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
 
                 def flipkart():
+                    # Accessing the flipkart website using selenium webdriver
+
                     def flipk_browse():
                         global driver
                         search=flipkartprod.get()
@@ -484,6 +486,8 @@ class Mainhome:
                     Button(flipkartframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = flipk_browse,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
 
                 def youtube():
+                    # Accessing the flipkart website using selenium webdriver
+
                     def yt_browse():
                         search=videotxt.get()
                         global driver
