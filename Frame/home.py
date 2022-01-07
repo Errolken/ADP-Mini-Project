@@ -9,6 +9,7 @@ from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os,requests,openpyxl,time,json,csv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+list=[]
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -264,35 +265,36 @@ class Mainhome:
                     if city_name=='':
                         showinfo(title='Error', message='Enter a city!', icon=WARNING)
                     else:   
+
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
-                        response = requests.get(url)
-                        x = response.json()
-                        # print(response)
-                        #checking if city is found or not
-                        if x["cod"] != "404":
+                        try:
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:    
+                            x = response.json()
+                            if x["cod"] != "404":
 
-                            y = x["main"]
-                            z = x["weather"]
-                            a = x['coord']
-                            b = x['wind']
-                            c = x['sys'] 
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
 
-                            latitude=a['lat']
-                            longitude=a['lon']
-                            temp = y["temp"]
-                            pressure = y["pressure"]
-                            humidity = y["humidity"]
-                            country=c['country']
-                            desc = z[0]["description"]
-                            wind_speed=b['speed']
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']
+                                # list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
 
-                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
-                        else:
-                            cityerror_img = PhotoImage(file = f"Frame/home_img/city404.png")
-                            citylabel = Label(dataframe,image=cityerror_img,background="#262626")
-                            citylabel.image=cityerror_img
-                            citylabel.place(x=0,y=0,width=1400,height=450)
-                            
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
+                            else:
+                                showinfo(title='Error', message='City not found!', icon=WARNING)
                 def export_details():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -301,63 +303,91 @@ class Mainhome:
                         showinfo(title='Error', message='Enter a city!', icon=WARNING)
                     else:    
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
-                        response = requests.get(url)
-                        x = json.loads(response.text)
-                        print(x)
+                        try:
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:    
+                            x = json.loads(response.text)
 
-                        #checking if city is found or not
-                        if x["cod"] != "404":
+                            if x["cod"] != "404":
 
-                            y = x["main"]
-                            z = x["weather"]
-                            a = x['coord']
-                            b = x['wind']
-                            c = x['sys'] 
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
 
-                            latitude=a['lat']
-                            longitude=a['lon']
-                            temp = y["temp"]
-                            pressure = y["pressure"]
-                            humidity = y["humidity"]
-                            country=c['country']
-                            desc = z[0]["description"]
-                            wind_speed=b['speed']
-                        else:
-                            cityerror_img = PhotoImage(file = f"Frame/home_img/city404.png")
-                            citylabel = Label(dataframe,image=cityerror_img,background="#262626")
-                            citylabel.image=cityerror_img
-                            citylabel.place(x=0,y=0,width=1400,height=450)            
-                    wb=openpyxl.load_workbook('test.xlsx')
-                    sheet = wb.get_active_sheet()
-                
-                    global list
-                    list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                    global list_headings
-                    list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
-                    # for i in range(10):
-                    #     a=list_headings[i]
-                    #     sheet.cell(row=1,column=i+1).value=a
-                    labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
-                    wb=openpyxl.load_workbook('Filo Directory/test.xlsx')
-                    sheet = wb.get_active_sheet()
-                    list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                    j=sheet.get_highest_row()+1
-                    print(j)
-                    sheet['A'+str(j)].value=j-1
-                    for i in range(1,11):
-                        if i<=9:
-                            sheet.cell(row=j,column=i+1).value=list[i-1]
-                            # print(sheet.cell(row=j,column=i+1).value)
-                    # for i in range(2,10):
-                    # sheet.cell(row=i,column=1).value=i-1
-                    wb.save('test.xlsx')
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']             
+                                wb=openpyxl.load_workbook('FiloDirectory\\test.xlsx')
+                                sheet = wb.get_active_sheet()
+                                list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
+                                j=sheet.get_highest_row()+1
+                                # print(j)
+                                sheet['A'+str(j)].value=j-1
+                                for i in range(1,11):
+                                    if i<=9:
+                                        sheet.cell(row=j,column=i+1).value=list[i-1]
+                                wb.save('FiloDirectory\\test.xlsx')
+                                showinfo(title='Successful', message='Data exported successfully!')
+                                cityentry.delete(0,END)
+
+                            else:
+                                showinfo(title='Error', message='City not found!', icon=WARNING)
                 def export_csv():
-                    outputFile = open('weather.csv', 'w', newline='')
-                    outputWriter = csv.writer(outputFile)
-                    outputWriter.writerow(list_headings)
-                    outputWriter.writerow(list)
-                    outputFile.close()
+                    api_key = "fc997859c662f09ea9dac60a3c71ecbc"
+                    apiurl = "http://api.openweathermap.org/data/2.5/weather?"
+                    city_name = cityentry.get()
+                    if city_name=='':
+                        showinfo(title='Error', message='Enter a city!', icon=WARNING)
+                    else:   
+
+                        url = apiurl + "appid=" + api_key + "&q=" + city_name
+                        try:    
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:
+                            x = response.json()
+                            if x["cod"] != "404":
+
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
+
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']
+                                list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                     
+                                weatherfile = open('FiloDirectory\weather.csv', 'a', newline='')
+                                weathWriter = csv.writer(weatherfile)
+                                weathWriter.writerow(list)
+                                weatherfile.close()
+                                showinfo(title='Successful', message='Data exported successfully!')
+                                cityentry.delete(0,END)
+
+
+                        
 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
@@ -368,7 +398,7 @@ class Mainhome:
                 Button(excelframe,borderwidth = 0,image=search_img,highlightthickness = 0,font=("Poppins",15),command = get_weather,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=852,y=80,width=40,height=40)
                 
                 Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=510,y=600,height=40)
-                Button(excelframe,borderwidth = 0,text="Export as CSV",highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=680,y=600,height=40)
+                Button(excelframe,borderwidth = 0,text="Export as CSV",highlightthickness = 0,font=("Poppins",15),command = export_csv,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=680,y=600,height=40)
                 Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                
             def services_code():
