@@ -183,9 +183,10 @@ class Mainhome:
 
                 cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
                 cityentry.place(x=450,y=80,width=400,height=40)
+                dataframe=Frame(excelframe,width=1400,height=450,bg='#262626')
+                dataframe.place(x=0,y=135)
                 def labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed):
-                    dataframe=Frame(excelframe,width=1400,height=450,bg='#262626')
-                    dataframe.place(x=0,y=135)
+                    Label(dataframe,background="#262626").place(x=0,y=0,width=1400,height=450)
                     Label(dataframe,text='City: '+str(city_name),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=0)
                     Label(dataframe,text='Latitude: '+str(latitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=50)
                     Label(dataframe,text='Longitude: '+str(longitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=100)
@@ -226,7 +227,11 @@ class Mainhome:
 
                             labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                         else:
-                            print(" City Not Found ")
+                            cityerror_img = PhotoImage(file = f"Frame/home_img/city404.png")
+                            citylabel = Label(dataframe,image=cityerror_img,background="#262626")
+                            citylabel.image=cityerror_img
+                            citylabel.place(x=0,y=0,width=1400,height=450)
+                            
                 def export_details():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -254,10 +259,15 @@ class Mainhome:
                             humidity = y["humidity"]
                             country=c['country']
                             desc = z[0]["description"]
-                            wind_speed=b['speed']    
+                            wind_speed=b['speed']
+                        else:
+                            cityerror_img = PhotoImage(file = f"Frame/home_img/city404.png")
+                            citylabel = Label(dataframe,image=cityerror_img,background="#262626")
+                            citylabel.image=cityerror_img
+                            citylabel.place(x=0,y=0,width=1400,height=450)
 
                     labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
-                    wb=openpyxl.load_workbook('Filo Directorytest.xlsx')
+                    wb=openpyxl.load_workbook('Filo Directory/test.xlsx')
                     sheet = wb.get_active_sheet()
                     list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
                     j=sheet.get_highest_row()+1
