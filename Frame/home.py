@@ -175,7 +175,6 @@ class Mainhome:
                     Button(splitframe,text="Split & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = splitprocess,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
                     Button(splitframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectsplitfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
 
-
                 menu.destroy()
                 glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                 pdfframe=Frame(w,width=1400,height=658,bg='#262626')
@@ -213,8 +212,6 @@ class Mainhome:
                     headerentry.delete(0, END)
                     textentry.delete("1.0",END)
                     word_code()
-
-
                     
                 wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
@@ -394,10 +391,7 @@ class Mainhome:
                                 weatherfile.close()
                                 showinfo(title='Successful', message='Data exported successfully!')
                                 cityentry.delete(0,END)
-
-
-                        
-
+            
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
@@ -429,11 +423,7 @@ class Mainhome:
                     email = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     email.place(x=180,y=230,width=350)
 
-                    Label(gmailframe,text="Password",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=290,width=700,height=80)
-                    pwd = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
-                    pwd.place(x=180,y=350,width=350)
-
-                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = email_log,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=450,width=120)
+                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = email_log,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
 
 
                 def amazon():
@@ -477,10 +467,8 @@ class Mainhome:
                         driver.find_element_by_class_name('_3704LK').send_keys(search+Keys.ENTER)
                         time.sleep(4)
                         price =driver.find_element_by_class_name('_30jeq3._1_WHN1').text
-                        Label(flipkartframe,text="Price: "+str(price),font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=230,y=600)
+                        Label(flipkartframe,text="Price: "+str(price),font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=230,y=600)        
                         
-                        
-
                     flipkartframe=Frame(servframe,width=700,height=658,bg='#000000')
                     flipkartframe.place(x=700,y=0)
                     flipkartlabel_img = PhotoImage(file = f"Frame/home_img/flipkartlabel.png")
@@ -518,7 +506,6 @@ class Mainhome:
                     videotxt.place(x=180,y=230,width=350)
 
                     Button(youtubeframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = yt_browse,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
-    
 
                 menu.destroy()
                 servframe=Frame(w,width=1400,height=658,bg='#262626')
