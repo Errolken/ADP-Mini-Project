@@ -3,4 +3,4 @@ from Frame import home
 
 def run():
     # login.Main_window('register')
-    home.Mainhome()
+    home.Mainhome().services_code

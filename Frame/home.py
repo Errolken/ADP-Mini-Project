@@ -429,11 +429,11 @@ class Mainhome:
                     email = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     email.place(x=180,y=230,width=350)
 
-                    Label(gmailframe,text="Password",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=290,width=700,height=80)
-                    pwd = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
-                    pwd.place(x=180,y=350,width=350)
+                    # Label(gmailframe,text="Password",font=("Poppins",24),background='#000000',foreground="#FFFFFF").place(x=0,y=290,width=700,height=80)
+                    # pwd = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
+                    # pwd.place(x=180,y=350,width=350)
 
-                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = email_log,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=450,width=120)
+                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = email_log,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=290,y=310,width=120)
 
 
                 def amazon():
