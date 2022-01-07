@@ -401,7 +401,7 @@ class Mainhome:
                 
                 Button(excelframe,borderwidth = 0,text="Export as Excel",highlightthickness = 0,font=("Poppins",15),command = export_details,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=510,y=600,height=40)
                 Button(excelframe,borderwidth = 0,text="Export as CSV",highlightthickness = 0,font=("Poppins",15),command = export_csv,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=680,y=600,height=40)
-                Label(w,text='Excel Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+                Label(w,text='Weather',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
                
             def services_code():
                 def gmail():
