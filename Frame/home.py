@@ -493,7 +493,7 @@ class Mainhome:
                         elem=driver.find_element_by_name("search_query")
                         elem.send_keys(search)
                         elem.send_keys(Keys.ENTER)
-                        # driver.find_element_by_xpath("//*[@id='search']").send_keys(name)
+                        
                     youtubeframe=Frame(servframe,width=700,height=658,bg='#000000')
                     youtubeframe.place(x=700,y=0)
                     youtubelabel_img = PhotoImage(file = f"Frame/home_img/youtubelabel.png")
