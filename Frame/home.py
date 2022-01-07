@@ -9,7 +9,7 @@ from tkinter.scrolledtext import ScrolledText
 import PyPDF2,os,requests,openpyxl,time,json,csv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-list=[]
+
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -543,7 +543,7 @@ class Mainhome:
             bttn(0,80,'Home','#D2E6FB','#D2E6FB',home)
             bttn(0,150,'Manage PDF','#D2E6FB','#D2E6FB',pdf_code)
             bttn(0,220,'Manage Word','#D2E6FB','#D2E6FB',word_code)
-            bttn(0,290,'Manage Excel','#D2E6FB','#D2E6FB',excel_code)
+            bttn(0,290,'Weather','#D2E6FB','#D2E6FB',excel_code)
             bttn(0,360,'Services','#D2E6FB','#D2E6FB',services_code)
             bttn(0,650,'Logout','#D2E6FB','#D2E6FB',logout)
                 
