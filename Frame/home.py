@@ -96,9 +96,10 @@ class Mainhome:
                                     pdf1File.close()
                                     pdf2File.close()
                                     showinfo(title='Success', message='File Merged Successfully!', icon='info')
+                                    pdfmerge()
                             else:
                                 showinfo(title='Error', message='Encrypted Files Not Supported.', icon=WARNING)
-                            pdfmerge()                           
+                                pdfmerge()                           
 
                     mergebtn = Button(mergeframe,text="Merge & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = finalmerge,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
                     selectfilebtn = Button(mergeframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
@@ -181,7 +182,19 @@ class Mainhome:
                 excelframe.place(x=0,y=42)
 
                 cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
-                cityentry.place(x=450,y=80,width=400,height=40)                
+                cityentry.place(x=450,y=80,width=400,height=40)
+                def labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed):
+                    dataframe=Frame(excelframe,width=1400,height=450,bg='#262626')
+                    dataframe.place(x=0,y=135)
+                    Label(dataframe,text='City: '+str(city_name),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=0)
+                    Label(dataframe,text='Latitude: '+str(latitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=50)
+                    Label(dataframe,text='Longitude: '+str(longitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=100)
+                    Label(dataframe,text='Temperature: '+str(temp),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=150)
+                    Label(dataframe,text='Pressure: '+str(pressure),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=200)
+                    Label(dataframe,text='Humidity: '+str(humidity),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=250)
+                    Label(dataframe,text='Country: '+str(country),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=300)
+                    Label(dataframe,text='Sky: '+str(desc),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=350)
+                    Label(dataframe,text='Wind Speed: '+str(wind_speed),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=400)                
                 def get_weather():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -210,7 +223,8 @@ class Mainhome:
                             country=c['country']
                             desc = z[0]["description"]
                             wind_speed=b['speed']
-                            print(pressure)
+
+                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                         else:
                             print(" City Not Found ")
                 def export_details():
@@ -252,6 +266,10 @@ class Mainhome:
                     # for i in range(10):
                     #     a=list_headings[i]
                     #     sheet.cell(row=1,column=i+1).value=a
+                    labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
+                    wb=openpyxl.load_workbook('Filo Directorytest.xlsx')
+                    sheet = wb.get_active_sheet()
+                    list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
                     j=sheet.get_highest_row()+1
                     print(j)
                     sheet['A'+str(j)].value=j-1
