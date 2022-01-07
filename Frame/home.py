@@ -224,17 +224,6 @@ class Mainhome:
                 textentry=ScrolledText(wordframe,font=("Poppins",20),background="#FFFFFF")
                 textentry.place(x=600,y=120,width=790,height=508)
 
-                # Label(wordframe,text='Font Size',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=335,y=160)
-                # fontsize=Entry(wordframe,font=("Poppins",18),background="#FFFFFF")
-                # fontsize.place(x=340,y=200,width=80,height=40)
-                
-                # Label(wordframe,text='Font Style',font=("Poppins",18),background='#262626',foreground='#FFFFFF').place(x=100,y=160)
-                # fontstyleval = StringVar()
-                # fontstyle = ttk.Combobox(wordframe,textvariable = fontstyleval,foreground="#000000",font=("Poppins",10),state='readonly')
-                # fontstyle.place(x=100,y=200,height=40)
-                # fontstyle['values'] = ('Cambria','Comic Sans MS','Calibri','Cavolini','Arial')
-                # fontstyle.current(1)
-
                 doc_img = PhotoImage(file = f"Frame/home_img/doc.png")
                 label = Label(image=doc_img)
                 label.image=doc_img
@@ -279,7 +268,7 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:    
-                            x = json.loads(response.txt)
+                            x = json.loads(response.text)
                             if x["cod"] != "404":
 
                                 y = x["main"]
@@ -299,7 +288,10 @@ class Mainhome:
                         
                                 labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                             else:
-                                showinfo(title='Error', message='City not found!', icon=WARNING)
+                                city404_img = PhotoImage(file = f"Frame/home_img/city404.png")
+                                label = Label(image=city404_img)
+                                label.image=city404_img
+                                Label(dataframe,image=city404_img,background='#262626').place(x=0,y=0,width=1400,height=450)
                 def export_details():
                     #API to get weather details from openweathermap.org
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
@@ -348,7 +340,10 @@ class Mainhome:
                                 cityentry.delete(0,END)
 
                             else:
-                                showinfo(title='Error', message='City not found!', icon=WARNING)
+                                city404_img = PhotoImage(file = f"Frame/home_img/city404.png")
+                                label = Label(image=city404_img)
+                                label.image=city404_img
+                                Label(dataframe,image=city404_img,background='#262626').place(x=0,y=0,width=1400,height=450)
                 def export_csv():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -363,7 +358,7 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:
-                            x = json.loads(response.txt) # Converts json data to python dictionary
+                            x = json.loads(response.text) # Converts json data to python dictionary
                             if x["cod"] != "404":        # Checks status_code of the response
 
                                 y = x["main"]
@@ -390,7 +385,11 @@ class Mainhome:
                                 weatherfile.close()
                                 showinfo(title='Successful', message='Data exported successfully!')
                                 cityentry.delete(0,END)
-            
+                            else:
+                                city404_img = PhotoImage(file = f"Frame/home_img/city404.png")
+                                label = Label(image=city404_img)
+                                label.image=city404_img
+                                Label(dataframe,image=city404_img,background='#262626').place(x=0,y=0,width=1400,height=450)
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
