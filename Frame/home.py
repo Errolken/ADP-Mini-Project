@@ -1,4 +1,5 @@
 from tkinter import *
+import warnings
 from PIL import ImageTk,Image
 from PyPDF2 import pdf
 from Frame import login
@@ -101,12 +102,72 @@ class Mainhome:
                                 showinfo(title='Error', message='Encrypted Files Not Supported.', icon=WARNING)
                                 pdfmerge()                           
 
-                    mergebtn = Button(mergeframe,text="Merge & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = finalmerge,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
-                    selectfilebtn = Button(mergeframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
+                    Button(mergeframe,text="Merge & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = finalmerge,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
+                    Button(mergeframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
 
                 #funtion to split pdfs
                 def pdfsplit():
-                    print("split pdfs here")
+                    splitframe=Frame(pdfframe,width=1400,height=658,bg='#000000')
+                    splitframe.place(x=700,y=0)
+                    Label(splitframe,text='Split PDF',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=250,y=0)
+                    Label(splitframe,text='From',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=40,y=240)
+                    Label(splitframe,text='To',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=370,y=240)
+                    fromsplit=Entry(splitframe,font=("Poppins",18),background="#FFFFFF")
+                    fromsplit.place(x=140,y=250,width=80,height=40)
+                    tosplit=Entry(splitframe,font=("Poppins",18),background="#FFFFFF")
+                    tosplit.place(x=440,y=250,width=80,height=40)
+                    def selectsplitfile():
+                        global splitfile,splitcount
+                        splitcount=0
+                        splitfile=filedialog.askopenfilename(initialdir="C:\\",title="Open",filetypes=(("PDF Files","*.pdf"),("All files","*.*")))
+                        if splitfile:
+                            splitcount+=1
+                            t1=Entry(splitframe,bd=0,highlightthickness=0,font=("Poppins",16))
+                            t1.place(x=100,y=330,width=650)
+                            t1.insert(0,os.path.basename(splitfile))
+                            t1.configure(state='readonly',readonlybackground="#000000",foreground="#FFFFFF")
+                            
+                    def splitprocess():
+                        if splitcount!=0:
+                            pdfFile = open(splitfile,'rb')
+                            pdfReader = PyPDF2.PdfFileReader(pdfFile)
+                            pdfWriter = PyPDF2.PdfFileWriter()
+                            pdfrange=pdfReader.numPages
+                            pageSt=fromsplit.get()
+                            pageEnd=tosplit.get()
+                            if pageSt!='' and pageEnd!='':
+                                if pageSt.isdigit() and pageEnd.isdigit():
+                                    if int(pageSt)<=pdfrange and int(pageEnd)<=pdfrange:
+                                        if int(pageSt)<=int(pageEnd):
+                                            for i in range(int(pageSt)-1,int(pageEnd)):
+                                                pageObj = pdfReader.getPage(i)
+                                                pdfWriter.addPage(pageObj)
+                                            
+                                            splitwrite = filedialog.asksaveasfilename(initialdir="C:\\",defaultextension = "*.pdf", filetypes = (("PDF Files", "*.pdf"),("All files","*.*")))
+                                            if splitwrite:
+                                                pdfOutputFile = open(splitwrite, 'wb')
+                                                pdfWriter.write(pdfOutputFile)
+                                                pdfOutputFile.close()
+                                                pdfFile.close()
+                                                showinfo(title='Success', message='File has been split Successfully!', icon='info')
+                                                pdfsplit()
+                                        else:
+                                            showinfo(title='Error', message='Invalid Range', icon=WARNING)
+                                    else:
+                                        showinfo(title='Error', message='Invalid Range', icon=WARNING)
+                                else:
+                                    showinfo(title='Error', message='Invalid Range', icon=WARNING)
+                                    fromsplit.delete(0, END)
+                                    tosplit.delete(0, END)
+                            else:
+                                showinfo(title='Error', message='Range cannot be empty', icon=WARNING)
+                        else:
+                            showinfo(title='Error', message='Select a file to Split', icon=WARNING)
+
+
+                    Button(splitframe,text="Split & Save",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = splitprocess,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=450,y=558,width=200)
+                    Button(splitframe,text="Select File",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = selectsplitfile,background="#FFFFFF",foreground="#262626",activebackground="#FFFFFF",relief = "flat").place(x=100,y=100,width=500)
+
 
                 menu.destroy()
                 glabel=Label(w,text='PDF Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
