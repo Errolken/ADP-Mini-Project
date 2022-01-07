@@ -204,6 +204,9 @@ class Mainhome:
                     if wordPath:
                         doc.save(wordPath)
                     showinfo(title='Success', message='File created Successfully!', icon='info')
+                    headerentry.delete(0, END)
+                    textentry.delete("1.0",END)
+                    word_code()
 
 
                     
