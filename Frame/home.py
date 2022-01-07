@@ -184,9 +184,10 @@ class Mainhome:
 
                 cityentry=Entry(excelframe,font=("Poppins",20),background="#FFFFFF")
                 cityentry.place(x=450,y=80,width=400,height=40)
+                dataframe=Frame(excelframe,width=1400,height=450,bg='#262626')
+                dataframe.place(x=0,y=135)
                 def labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed):
-                    dataframe=Frame(excelframe,width=1400,height=450,bg='#262626')
-                    dataframe.place(x=0,y=135)
+                    Label(dataframe,background="#262626").place(x=0,y=0,width=1400,height=450)
                     Label(dataframe,text='City: '+str(city_name),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=0)
                     Label(dataframe,text='Latitude: '+str(latitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=50)
                     Label(dataframe,text='Longitude: '+str(longitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=100)
