@@ -49,6 +49,7 @@ class Mainhome:
                 myButton1.place(x=x,y=y)
 
             def pdf_code():
+                menu.destroy()
                 #function to merge pdfs
                 def pdfmerge():
                     mergeframe=Frame(pdfframe,width=1400,height=658,bg='#000000')
