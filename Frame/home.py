@@ -254,10 +254,11 @@ class Mainhome:
                             humidity = y["humidity"]
                             country=c['country']
                             desc = z[0]["description"]
-                            wind_speed=b['speed']             
-                    wb=openpyxl.load_workbook('test.xlsx')
-                    sheet = wb.get_active_sheet()
+                            wind_speed=b['speed']    
 
+                    labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
+                    wb=openpyxl.load_workbook('Filo Directorytest.xlsx')
+                    sheet = wb.get_active_sheet()
                     list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
                     j=sheet.get_highest_row()+1
                     print(j)
@@ -268,7 +269,7 @@ class Mainhome:
                             # print(sheet.cell(row=j,column=i+1).value)
                     # for i in range(2,10):
                     # sheet.cell(row=i,column=1).value=i-1
-                    wb.save('test.xlsx')
+                    wb.save('Filo Directory/test.xlsx')
                 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
