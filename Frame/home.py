@@ -206,30 +206,34 @@ class Mainhome:
                     else:   
 
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
-                        response = requests.get(url)
-                        x = response.json()
-                        if x["cod"] != "404":
+                        try:
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:    
+                            x = response.json()
+                            if x["cod"] != "404":
 
-                            y = x["main"]
-                            z = x["weather"]
-                            a = x['coord']
-                            b = x['wind']
-                            c = x['sys'] 
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
 
-                            latitude=a['lat']
-                            longitude=a['lon']
-                            temp = y["temp"]
-                            pressure = y["pressure"]
-                            humidity = y["humidity"]
-                            country=c['country']
-                            desc = z[0]["description"]
-                            wind_speed=b['speed']
-                            # list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                            # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']
+                                # list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
 
-                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
-                        else:
-                            showinfo(title='Error', message='City not found!', icon=WARNING)
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
+                            else:
+                                showinfo(title='Error', message='City not found!', icon=WARNING)
                 def export_details():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -238,42 +242,46 @@ class Mainhome:
                         showinfo(title='Error', message='Enter a city!', icon=WARNING)
                     else:    
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
-                        response = requests.get(url)
-                        x = json.loads(response.text)
+                        try:
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:    
+                            x = json.loads(response.text)
 
-                        if x["cod"] != "404":
+                            if x["cod"] != "404":
 
-                            y = x["main"]
-                            z = x["weather"]
-                            a = x['coord']
-                            b = x['wind']
-                            c = x['sys'] 
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
 
-                            latitude=a['lat']
-                            longitude=a['lon']
-                            temp = y["temp"]
-                            pressure = y["pressure"]
-                            humidity = y["humidity"]
-                            country=c['country']
-                            desc = z[0]["description"]
-                            wind_speed=b['speed']             
-                            wb=openpyxl.load_workbook('FiloDirectory\\test.xlsx')
-                            sheet = wb.get_active_sheet()
-                            list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                            # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
-                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
-                            j=sheet.get_highest_row()+1
-                            # print(j)
-                            sheet['A'+str(j)].value=j-1
-                            for i in range(1,11):
-                                if i<=9:
-                                    sheet.cell(row=j,column=i+1).value=list[i-1]
-                            wb.save('FiloDirectory\\test.xlsx')
-                            showinfo(title='Successful', message='Data exported successfully!')
-                            cityentry.delete(0,END)
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']             
+                                wb=openpyxl.load_workbook('FiloDirectory\\test.xlsx')
+                                sheet = wb.get_active_sheet()
+                                list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)                 
+                                j=sheet.get_highest_row()+1
+                                # print(j)
+                                sheet['A'+str(j)].value=j-1
+                                for i in range(1,11):
+                                    if i<=9:
+                                        sheet.cell(row=j,column=i+1).value=list[i-1]
+                                wb.save('FiloDirectory\\test.xlsx')
+                                showinfo(title='Successful', message='Data exported successfully!')
+                                cityentry.delete(0,END)
 
-                        else:
-                            showinfo(title='Error', message='City not found!', icon=WARNING)
+                            else:
+                                showinfo(title='Error', message='City not found!', icon=WARNING)
                 def export_csv():
                     api_key = "fc997859c662f09ea9dac60a3c71ecbc"
                     apiurl = "http://api.openweathermap.org/data/2.5/weather?"
@@ -283,38 +291,42 @@ class Mainhome:
                     else:   
 
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
-                        response = requests.get(url)
-                        x = response.json()
-                        if x["cod"] != "404":
+                        try:    
+                            response = requests.get(url)
+                        except:
+                            showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
+                        else:
+                            x = response.json()
+                            if x["cod"] != "404":
 
-                            y = x["main"]
-                            z = x["weather"]
-                            a = x['coord']
-                            b = x['wind']
-                            c = x['sys'] 
+                                y = x["main"]
+                                z = x["weather"]
+                                a = x['coord']
+                                b = x['wind']
+                                c = x['sys'] 
 
-                            latitude=a['lat']
-                            longitude=a['lon']
-                            temp = y["temp"]
-                            pressure = y["pressure"]
-                            humidity = y["humidity"]
-                            country=c['country']
-                            desc = z[0]["description"]
-                            wind_speed=b['speed']
-                            list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                            # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                                latitude=a['lat']
+                                longitude=a['lon']
+                                temp = y["temp"]
+                                pressure = y["pressure"]
+                                humidity = y["humidity"]
+                                country=c['country']
+                                desc = z[0]["description"]
+                                wind_speed=b['speed']
+                                list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
+                                # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
 
-                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
-                   
-                            weatherfile = open('FiloDirectory\weather.csv', 'a', newline='')
-                            weathWriter = csv.writer(weatherfile)
-                            weathWriter.writerow(list)
-                            weatherfile.close()
-                            showinfo(title='Successful', message='Data exported successfully!')
-                            cityentry.delete(0,END)
-
-
+                                labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                     
+                                weatherfile = open('FiloDirectory\weather.csv', 'a', newline='')
+                                weathWriter = csv.writer(weatherfile)
+                                weathWriter.writerow(list)
+                                weatherfile.close()
+                                showinfo(title='Successful', message='Data exported successfully!')
+                                cityentry.delete(0,END)
+
+
+                        
 
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
