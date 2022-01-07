@@ -444,6 +444,8 @@ class Mainhome:
                         driver.get('https://www.amazon.in')
                         time.sleep(1)
                         driver.find_element_by_id('twotabsearchtextbox').send_keys(search+Keys.ENTER)
+                        time.sleep(3)
+                        driver.find_element_by_class_name('a-size-medium.a-color-base.a-text-normal').click()
 
                     amazonframe=Frame(servframe,width=700,height=658,bg='#000000')
                     amazonframe.place(x=700,y=0)
