@@ -343,7 +343,7 @@ class Mainhome:
                                 for i in range(1,11):
                                     if i<=9:
                                         sheet.cell(row=j,column=i+1).value=list[i-1]
-                                wb.save('FiloDirectory\\test.xlsx')
+                                wb.save('FiloDirectory/test.xlsx')
                                 showinfo(title='Successful', message='Data exported successfully!')
                                 cityentry.delete(0,END)
 
@@ -385,7 +385,7 @@ class Mainhome:
 
                                 labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
                     
-                                weatherfile = open('FiloDirectory\weather.csv', 'a', newline='')
+                                weatherfile = open('FiloDirectory/weather.csv', 'a', newline='')
                                 weathWriter = csv.writer(weatherfile)
                                 weathWriter.writerow(list)
                                 weatherfile.close()
