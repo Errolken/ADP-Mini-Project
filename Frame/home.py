@@ -20,7 +20,13 @@ class Mainhome:
         w.iconbitmap(r'Frame/home_img/icon.ico')
         def default_home():
             homeframe=Frame(w,width=1400,height=658,bg='#262626')
-            glabel=Label(w,text='Home',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42) 
+            glabel=Label(w,text='Home',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
+            vector_img = PhotoImage(file = f"Frame/home_img/Vector.png")
+            vector = Label(image=vector_img,background='#262626')
+            vector.image=vector_img
+            vector.place(x=180,y=160)
+            Label(homeframe,text='Welcome to Filo!',font=("Poppins",80),background='#262626',foreground='#FFFFFF').place(x=350,y=100)
+            Label(homeframe,text='Manage Docs, PDF, CSV files and much more from one place!',font=("Poppins",30),background='#262626',foreground='#FFFFFF').place(x=70,y=300)   
             homeframe.place(x=0,y=42)
 
         def toggle_win():
