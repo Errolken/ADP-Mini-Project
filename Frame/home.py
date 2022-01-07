@@ -5,7 +5,7 @@ from Frame import login
 from tkinter import filedialog
 from tkinter.messagebox import showinfo, WARNING
 from tkinter.scrolledtext import ScrolledText
-import PyPDF2,os,requests,openpyxl,time
+import PyPDF2,os,requests,openpyxl,time,json,csv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 class Mainhome:
@@ -222,7 +222,8 @@ class Mainhome:
                     else:    
                         url = apiurl + "appid=" + api_key + "&q=" + city_name
                         response = requests.get(url)
-                        x = response.json()
+                        x = json.loads(response.text)
+                        print(x)
 
                         #checking if city is found or not
                         if x["cod"] != "404":
@@ -243,9 +244,11 @@ class Mainhome:
                             wind_speed=b['speed']             
                     wb=openpyxl.load_workbook('test.xlsx')
                     sheet = wb.get_active_sheet()
-
+                
+                    global list
                     list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
-                    # list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
+                    global list_headings
+                    list_headings=['sl no','city','latitude','longitude','temp','pressure','humidity','country','desc','wind_speed']
                     # for i in range(10):
                     #     a=list_headings[i]
                     #     sheet.cell(row=1,column=i+1).value=a
@@ -259,7 +262,14 @@ class Mainhome:
                     # for i in range(2,10):
                     # sheet.cell(row=i,column=1).value=i-1
                     wb.save('test.xlsx')
-                
+                def export_csv():
+                    outputFile = open('weather.csv', 'w', newline='')
+                    outputWriter = csv.writer(outputFile)
+                    outputWriter.writerow(list_headings)
+                    outputWriter.writerow(list)
+                    outputFile.close()
+                    
+
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
