@@ -209,10 +209,10 @@ class Mainhome:
                     print(wordPath)
                     if wordPath:
                         doc.save(wordPath)
-                    showinfo(title='Success', message='File created Successfully!', icon='info')
-                    headerentry.delete(0, END)
-                    textentry.delete("1.0",END)
-                    word_code()
+                        showinfo(title='Success', message='File created Successfully!', icon='info')
+                        headerentry.delete(0, END)
+                        textentry.delete("1.0",END)
+                        word_code()
                     
                 wordframe=Frame(w,width=1400,height=658,bg='#262626')
                 glabel=Label(w,text='Word Manager',font=("Poppins",24),background='#000000',foreground='#FFFFFF').place(x=400,y=0,width=600,height=42)
