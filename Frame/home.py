@@ -5,7 +5,9 @@ from Frame import login
 from tkinter import filedialog
 from tkinter.messagebox import showinfo, WARNING
 from tkinter.scrolledtext import ScrolledText
-import PyPDF2,os,requests,openpyxl
+import PyPDF2,os,requests,openpyxl,time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 class Mainhome:
     def __init__(self):
         w=Tk()
@@ -252,21 +254,22 @@ class Mainhome:
                             humidity = y["humidity"]
                             country=c['country']
                             desc = z[0]["description"]
-                            wind_speed=b['speed']
-                            labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed)
-                        else:
-                            print(" City Not Found ")    
-                    wb=openpyxl.load_workbook('Filo Directory/test.xlsx')
+                            wind_speed=b['speed']             
+                    wb=openpyxl.load_workbook('test.xlsx')
                     sheet = wb.get_active_sheet()
 
                     list=[city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed]
                     j=sheet.get_highest_row()+1
+                    print(j)
                     sheet['A'+str(j)].value=j-1
                     for i in range(1,11):
                         if i<=9:
                             sheet.cell(row=j,column=i+1).value=list[i-1]
-                    cityentry.delete(0, END)
-                    wb.save('Filo Directory/test.xlsx')
+                            # print(sheet.cell(row=j,column=i+1).value)
+                    # for i in range(2,10):
+                    # sheet.cell(row=i,column=1).value=i-1
+                    wb.save('test.xlsx')
+                
 
                 search_img = PhotoImage(file = f"Frame/home_img/search.png")
                 label = Label(image=search_img)
@@ -281,6 +284,12 @@ class Mainhome:
                
             def services_code():
                 def gmail():
+                    def email_log():
+                        search=email.get()
+                        global driver
+                        driver = webdriver.Chrome()
+                        driver.get("https://gmail.com")
+                        driver.find_element_by_id("identifierId").send_keys(search)
                     gmailframe=Frame(servframe,width=700,height=658,bg='#000000')
                     gmailframe.place(x=700,y=0)
                     gmaillabel_img = PhotoImage(file = f"Frame/home_img/gmaillabel.png")
@@ -296,10 +305,18 @@ class Mainhome:
                     pwd = Entry(gmailframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     pwd.place(x=180,y=350,width=350)
 
-                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=450,width=120)
+                    Button(gmailframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = email_log,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=450,width=120)
 
 
                 def amazon():
+                    def browse_amaz():
+                        global driver
+                        driver=webdriver.Chrome()
+                        search=amazonprod.get()
+                        driver.get('https://www.amazon.in')
+                        time.sleep(1)
+                        driver.find_element_by_id('twotabsearchtextbox').send_keys(search+Keys.ENTER)
+
                     amazonframe=Frame(servframe,width=700,height=658,bg='#000000')
                     amazonframe.place(x=700,y=0)
                     amazonlabel_img = PhotoImage(file = f"Frame/home_img/amazonlabel.png")
@@ -312,9 +329,18 @@ class Mainhome:
                     amazonprod = Entry(amazonframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     amazonprod.place(x=180,y=230,width=350)
 
-                    Button(amazonframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+                    Button(amazonframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = browse_amaz,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
 
                 def flipkart():
+                    def flipk_browse():
+                        global driver
+                        search=flipkartprod.get()
+                        driver=webdriver.Chrome()
+                        driver.get('https://www.flipkart.com')
+                        time.sleep(1)
+                        driver.find_element_by_class_name('_2KpZ6l._2doB4z').click()
+                        time.sleep(1)
+                        driver.find_element_by_class_name('_3704LK').send_keys(search+Keys.ENTER)
                     flipkartframe=Frame(servframe,width=700,height=658,bg='#000000')
                     flipkartframe.place(x=700,y=0)
                     flipkartlabel_img = PhotoImage(file = f"Frame/home_img/flipkartlabel.png")
@@ -327,9 +353,19 @@ class Mainhome:
                     flipkartprod = Entry(flipkartframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     flipkartprod.place(x=180,y=230,width=350)
                     
-                    Button(flipkartframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+                    Button(flipkartframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = flipk_browse,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
 
                 def youtube():
+                    def yt_browse():
+                        search=videotxt.get()
+                        global driver
+                        driver=webdriver.Chrome()
+                        driver.get('https://www.youtube.com')
+                        time.sleep(2)
+                        elem=driver.find_element_by_name("search_query")
+                        elem.send_keys(search)
+                        elem.send_keys(Keys.ENTER)
+                        # driver.find_element_by_xpath("//*[@id='search']").send_keys(name)
                     youtubeframe=Frame(servframe,width=700,height=658,bg='#000000')
                     youtubeframe.place(x=700,y=0)
                     youtubelabel_img = PhotoImage(file = f"Frame/home_img/youtubelabel.png")
@@ -341,7 +377,7 @@ class Mainhome:
                     videotxt = Entry(youtubeframe,bd = 0,bg = "#FFFFFF",font=("Poppins",15),highlightthickness = 0)
                     videotxt.place(x=180,y=230,width=350)
 
-                    Button(youtubeframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = None,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
+                    Button(youtubeframe,text="Lets Go!",borderwidth = 0,highlightthickness = 0,font=("Poppins",15),command = yt_browse,background="#FFFFFF",foreground="#000000",activebackground="#FFFFFF",relief = "flat").place(x=280,y=320,width=120)
     
 
                 menu.destroy()
