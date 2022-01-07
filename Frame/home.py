@@ -279,7 +279,7 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:    
-                            x = json.loads(response.txt)
+                            x = json.loads(response.text)
                             if x["cod"] != "404":
 
                                 y = x["main"]
@@ -363,7 +363,7 @@ class Mainhome:
                         except:
                             showinfo(title='Error', message='Internet Connection unavailable!', icon=WARNING)
                         else:
-                            x = json.loads(response.txt) # Converts json data to python dictionary
+                            x = json.loads(response.text) # Converts json data to python dictionary
                             if x["cod"] != "404":        # Checks status_code of the response
 
                                 y = x["main"]
