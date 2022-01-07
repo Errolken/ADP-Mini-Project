@@ -265,9 +265,7 @@ class Mainhome:
                             cityerror_img = PhotoImage(file = f"Frame/home_img/city404.png")
                             citylabel = Label(dataframe,image=cityerror_img,background="#262626")
                             citylabel.image=cityerror_img
-                            citylabel.place(x=0,y=0,width=1400,height=450)
-
-                            wind_speed=b['speed']             
+                            citylabel.place(x=0,y=0,width=1400,height=450)            
                     wb=openpyxl.load_workbook('test.xlsx')
                     sheet = wb.get_active_sheet()
                 
