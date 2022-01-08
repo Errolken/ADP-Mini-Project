@@ -245,7 +245,7 @@ class Mainhome:
                 dataframe.place(x=0,y=135)
                 def labeldata(city_name,latitude,longitude,temp,pressure,humidity,country,desc,wind_speed):
                     Label(dataframe,background="#262626").place(x=0,y=0,width=1400,height=450)
-                    Label(dataframe,text='City: '+str(city_name),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=0)
+                    Label(dataframe,text='Place: '+str(city_name),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=0)
                     Label(dataframe,text='Latitude: '+str(latitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=50)
                     Label(dataframe,text='Longitude: '+str(longitude),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=100)
                     Label(dataframe,text='Temperature: '+str(temp),font=("Poppins",24),background='#262626',foreground='#FFFFFF').place(x=10,y=150)
