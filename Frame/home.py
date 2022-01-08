@@ -558,7 +558,6 @@ class Mainhome:
                 
             def dele():
                 menu.destroy()
-
                 
             global menubtn
             menubtn=ImageTk.PhotoImage(Image.open('Frame/home_img/close.png'))
