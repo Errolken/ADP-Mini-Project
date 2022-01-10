@@ -339,6 +339,7 @@ class Mainhome:
                                 wb.save('FiloDirectory/test.xlsx')
                                 showinfo(title='Successful', message='Data exported successfully!')
                                 cityentry.delete(0,END)
+                                excel_code()
 
                             else:
                                 city404_img = PhotoImage(file = f"Frame/home_img/city404.png")
@@ -386,6 +387,7 @@ class Mainhome:
                                 weatherfile.close()
                                 showinfo(title='Successful', message='Data exported successfully!')
                                 cityentry.delete(0,END)
+                                excel_code()
                             else:
                                 city404_img = PhotoImage(file = f"Frame/home_img/city404.png")
                                 label = Label(image=city404_img)
