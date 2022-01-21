@@ -1,9 +1,0 @@
-create database adp;
-use adp;
-create table user_details
-(
-email varchar(30) primary key,
-pwd varchar(16)
-);
-select * from user_details;
-drop table user_details;
