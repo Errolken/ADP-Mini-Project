@@ -65,7 +65,7 @@ class Mainhome:
                                 if mergefile1!='' and mergefile1:
                                     pdfmergecount+=1
                                     t1=Entry(mergeframe,bd=0,highlightthickness=0,font=("Poppins",16))
-                                    t1.place(x=100,y=230,width=650)
+                                    t1.place(x=100,y=230,width=500)
                                     t1.insert(0,os.path.basename(mergefile1))
                                     t1.configure(state='readonly',readonlybackground="#000000",foreground="#FFFFFF")
                             else:
@@ -73,7 +73,7 @@ class Mainhome:
                                 if mergefile2!='':
                                     pdfmergecount+=1
                                     t1=Entry(mergeframe,bd=0,highlightthickness=0,font=("Poppins",16))
-                                    t1.place(x=100,y=330,width=650)
+                                    t1.place(x=100,y=330,width=500)
                                     t1.insert(0,os.path.basename(mergefile2))
                                     t1.configure(state='readonly',readonlybackground="#000000",foreground="#FFFFFF")
                         else:
